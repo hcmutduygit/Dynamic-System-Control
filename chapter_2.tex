@@ -49,14 +49,57 @@
         &\Rightarrow \text{Với } \omega > 7.315: \text{ biên độ giảm từ } +\infty \text{ về } -\infty
     \end{align*}
     \textbf{Pha:}
-    \[
-        \angle G(j\omega) =
-        \begin{cases}
-            0 \quad ;\quad \omega < 7{,}315 \\
-            -180^\circ \quad ;\quad \omega > 7{,}315 \\
-            \text{Pha nhảy từ 0 xuống } -180^\circ \text{ tại } \omega = 7.315
-        \end{cases}
-    \]
+    \begin{itemize}
+        \item $\omega < 7.314$: $-\omega^2 + 53.509 > 0$, pha $\angle G_1(j\omega) = 0^\circ$,
+        \item $\omega = 7.314$: $-\omega^2 + 53.509 = 0$, pha nhảy từ $0^\circ$ xuống $-180^\circ$,
+        \item $\omega > 7.314$: $-\omega^2 + 53.509 < 0$, pha $\angle G_1(j\omega) = -180^\circ$.
+    \end{itemize}
+    \textbf{Tính độ dự trữ biên độ (GM):}
+    \begin{itemize}
+        \item \textbf{Tìm tần số cắt pha} ($\omega_{pc}$): Đây là tần số mà pha đạt $-180^\circ$.
+        \begin{itemize}
+            \item Từ phân tích pha, $\angle G_1(j\omega) = -180^\circ$ khi $\omega \geq 7.314$.
+            \item Vậy $\omega_{pc} = 7.314$ rad/s.
+        \end{itemize}
+        \item \textbf{Tính biên độ tại $\omega_{pc}$:}
+            \[
+            |G_1(j\omega_{pc})| = \left| \frac{4.848}{-(7.314)^2 + 53.509} \right| = \frac{4.848}{0} \to \infty
+            \]
+            \[
+            |G_1(j\omega_{pc})|_{dB} \to +\infty \text{ dB}
+            \]
+            
+            \item \textbf{Độ dự trữ biên độ:}
+            \[
+            \text{GM (dB)} = -20 \log_{10} |G_1(j\omega_{pc})| \to -\infty \text{ dB}
+            \]
+        \end{itemize}
+\textbf{Tính độ dự trữ pha ($\phi_M$):}           
+            \begin{itemize}
+                \item \textbf{Tìm tần số cắt biên độ} ($\omega_{gc}$): Đây là tần số mà $|G_1(j\omega)| = 1$ (0 dB).
+                \begin{itemize}
+                    \item Đặt $|G_1(j\omega)| = 1$:
+                    \[
+                    \left| \frac{4.848}{-\omega^2 + 53.509} \right| = 1
+                    \]
+                    \item Khi $\omega < 7.314$, $|-\omega^2 + 53.509| = 53.509 - \omega^2$, nên:
+                    \[
+                    \frac{4.848}{53.509 - \omega^2} = 1 \Rightarrow 53.509 - \omega^2 = 4.848 \Rightarrow \omega^2 = 53.509 - 4.848 = 48.661
+                    \Rightarrow \omega_{gc} \approx \sqrt{48.661} \approx 6.976 \, \text{rad/s}
+                    \]
+                \end{itemize}
+                
+                \item \textbf{Tính pha tại $\omega_{gc}$:}
+                \begin{itemize}
+                    \item Tại $\omega_{gc} = 6.976 < 7.314$, pha $\angle G_1(j\omega_{gc}) = 0^\circ$.
+                \end{itemize}
+                
+                \item \textbf{Độ dự trữ pha:}
+                \[
+                \phi_M = 180^\circ + \angle G_1(j\omega_{gc}) = 180^\circ + 0^\circ = 180^\circ
+                \]
+            \end{itemize}
+        
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{pictures/bode.png}
