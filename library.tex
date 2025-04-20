@@ -7,7 +7,7 @@
 \usepackage{listings} % Thêm gói listings để chèn code
 \usepackage{xcolor} % Màu cho code
 \lstset{
-    language=R,
+    language=Matlab,
     basicstyle=\footnotesize\ttfamily,
     numbers=none,
     numberstyle=\tiny\color{gray},
@@ -25,12 +25,21 @@
     rulecolor=\color{black},
     basicstyle=\ttfamily,
 }
+
+% Footnote and References
+\usepackage[style=numeric,backend=biber]{biblatex} % Sử dụng gói biblatex
+\usepackage{capt-of} %  Footnote trong caption
+\usepackage[perpage]{footmisc} % Đánh số lại chú thích mỗi trang
+
 % Thiết lập bảng
 \usepackage{array} % Gói hỗ trợ các bảng phức tạp
 \usepackage{tabularx}
 \usepackage{longtable} % Tạo bảng qua nhiều trang
 \usepackage{cellspace}
 \usepackage{diagbox} % Gói hỗ trợ tạo các ô chéo trong bảng
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{adjustbox}
 
 % Thiết lập công thức toán học
 \usepackage{amsmath} % Gói hỗ trợ các công thức toán học
@@ -48,7 +57,6 @@
 \usepackage{float} % Để chèn hình ảnh vào đúng vị trí
 \usepackage{fancyvrb} % Đưa dữ liệu dạng nguyên thủy vào
 
-
 % Thiết lập kích thước
 \usepackage{geometry}
 \geometry{
@@ -60,5 +68,5 @@
 \usepackage{hyperref} %Chèn link
 \hypersetup{urlcolor=black,linkcolor=black,citecolor=black,colorlinks=true} % Màu cho các đường nét
 \everymath{\color{black}}
-\setlength{\headheight}{40pt}
+\setlength{\headheight}{20pt}
 \pagestyle{fancy}
