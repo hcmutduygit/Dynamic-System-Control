@@ -66,21 +66,3 @@ Nhận xét:
     \item Hệ thống vòng hở: G(s) có các cực trên trục ảo $s=+-7.315$ nên hệ thống ổn định biên. Đồ thị Bode cho thấy biên độ đạt đỉnh tại $\omega=7.315$ và pha nhảy xuống là $-180^\circ$. Điều này xác nhận hệ thống dao động không suy giảm.
     \item Từ độ thị ta có thể thấy độ dữ trữ pha $G_M < 0 dB$ nên đã vi phạm tiêu chuẩn ổn định của biểu đồ Bode $\Rightarrow$ Hệ chưa ổn định. 
 \end{itemize}
-
-\chapter{Đánh giá chất lượng hệ thống điều khiển}
-\[
-    G(s) = \frac{4.85}{s^2 + 53.51}
-\]
-\section{Các tiêu chuẩn về xác lập}
-Hàm truyền vòng kín:
-\[
-    T(s) = \frac{G(s)}{1+G(s)} = \frac{4.85}{s^2 + 58.36}
-\]
-Xét với đầu vào bậc (step input, $R(s)=\frac{1}{s}$), sai số xác lập được tính bằng:
-\[
-e_{xl} = \lim_{s \to 0} \frac{s \cdot R(s)}{1 + G(s)} 
-= \lim_{s \to 0} \frac{1}{1 + k_p} \approx 0{,}92
-\]
-\begin{center}
-    Với $k_p$  là hệ số vị trí, $k_p = \lim_{s \to 0} G(s) \approx 0.09$ 
-\end{center}
