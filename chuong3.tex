@@ -1,0 +1,17 @@
+\chapter{Đánh giá chất lượng hệ thống điều khiển}
+\[
+    G(s) = \frac{4.85}{s^2 + 53.51}
+\]
+\section{Các tiêu chuẩn về xác lập}
+Hàm truyền vòng kín:
+\[
+    T(s) = \frac{G(s)}{1+G(s)} = \frac{4.85}{s^2 + 58.36}
+\]
+Xét với đầu vào bậc (step input, $R(s)=\frac{1}{s}$), sai số xác lập được tính bằng:
+\[
+e_{xl} = \lim_{s \to 0} \frac{s \cdot R(s)}{1 + G(s)} 
+= \lim_{s \to 0} \frac{1}{1 + k_p} \approx 0{,}92
+\]
+\begin{center}
+    Với $k_p$  là hệ số vị trí, $k_p = \lim_{s \to 0} G(s) \approx 0.09$ 
+\end{center}
