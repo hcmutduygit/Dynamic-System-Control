@@ -68,32 +68,28 @@
             \[
             |G_1(j\omega_{pc})|_{dB} \to +\infty \text{ dB}
             \]
-            
             \item \textbf{Độ dự trữ biên độ:}
             \[
             \text{GM (dB)} = -20 \log_{10} |G_1(j\omega_{pc})| \to -\infty \text{ dB}
             \]
-        \end{itemize}
-\textbf{Tính độ dự trữ pha ($\phi_M$):}           
+    \end{itemize}
+    \textbf{Tính độ dự trữ pha ($\phi_M$):}           
+        \begin{itemize}
+            \item \textbf{Tìm tần số cắt biên độ} ($\omega_{gc}$): Đây là tần số mà $|G_1(j\omega)| = 1$ (0 dB).
             \begin{itemize}
-                \item \textbf{Tìm tần số cắt biên độ} ($\omega_{gc}$): Đây là tần số mà $|G_1(j\omega)| = 1$ (0 dB).
-                \begin{itemize}
-                    \item Đặt $|G_1(j\omega)| = 1$:
-                    \[
-                    \left| \frac{4.848}{-\omega^2 + 53.509} \right| = 1
-                    \]
-                    \item Khi $\omega < 7.314$, $|-\omega^2 + 53.509| = 53.509 - \omega^2$, nên:
-                    \[
-                    \frac{4.848}{53.509 - \omega^2} = 1 \Rightarrow 53.509 - \omega^2 = 4.848 \Rightarrow \omega^2 = 53.509 - 4.848 = 48.661
+                \item Đặt $|G_1(j\omega)| = 1$:
+                \[
+                \left| \frac{4.848}{-\omega^2 + 53.509} \right| = 1
+                \]
+                \item Khi $\omega < 7.314$, $|-\omega^2 + 53.509| = 53.509 - \omega^2$, nên:
+                \begin{align*}
+                    \frac{4.848}{53.509 - \omega^2} = 1 \Rightarrow 53.509 - \omega^2 = 4.848 \\
+                    \Rightarrow \omega^2 = 53.509 - 4.848 = 48.661 \\
                     \Rightarrow \omega_{gc} \approx \sqrt{48.661} \approx 6.976 \, \text{rad/s}
-                    \]
+                    \end{align*}
                 \end{itemize}
-                
-                \item \textbf{Tính pha tại $\omega_{gc}$:}
-                \begin{itemize}
-                    \item Tại $\omega_{gc} = 6.976 < 7.314$, pha $\angle G_1(j\omega_{gc}) = 0^\circ$.
-                \end{itemize}
-                
+                \item \textbf{Tính pha tại $\omega_{gc}$:} \\
+                    Tại $\omega_{gc} = 6.976 < 7.314$, pha $\angle G_1(j\omega_{gc}) = 0^\circ$.
                 \item \textbf{Độ dự trữ pha:}
                 \[
                 \phi_M = 180^\circ + \angle G_1(j\omega_{gc}) = 180^\circ + 0^\circ = 180^\circ
