@@ -7,5 +7,5 @@ main.synctex.gz
 main.toc 
 titlepage.aux
 main.bbl
-main.bbl-SAVE-ERROR
-!build/main.pdf
+build
+main.run.xml
