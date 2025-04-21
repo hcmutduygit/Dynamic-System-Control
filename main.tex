@@ -32,6 +32,7 @@
     \input{chapter_1.tex}
     \input{chapter_2.tex}
     \input{chapter_3.tex}
+<<<<<<< HEAD
 
     \section{Mã nguồn C}
     \begin{verbatim}
@@ -40,9 +41,17 @@
         return 0;
     }
     \end{verbatim}
+=======
+    \input{chapter_4.tex}
+>>>>>>> 63ecbf8 (add chapter 4)
 
-    \section{Thông số PID}
-    - Kp = 3.7  
-    - Ki = 0.25  
-    - Kd = 0.1
+    \makeatletter
+    \renewcommand{\appendixname}{Phụ lục}         % Dùng cho tiêu đề trong trang chương
+    \renewcommand{\appendixtocname}{Phụ lục}       % Dùng cho tiêu đề trong Mục lục
+    \renewcommand{\@chapapp}{Phụ lục}              % Dùng cho 'Phụ lục A', 'Phụ lục B'
+    \makeatother
+    \begin{appendices}
+        \input{appendix.tex}
+    \end{appendices}
+    
 \end{document}

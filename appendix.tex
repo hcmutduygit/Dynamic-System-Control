@@ -1,9 +1,93 @@
+\chapter{Code matlab}
+    \section{Biểu đồ Bode}
+    \begin{lstlisting}[caption={Code vẽ biểu đồ Bode}, label={lst:bode}]
+    % Delete all variables and close all figures
+    clear all;
+    clc;
+    close all;
 
-\begin{lstlisting}[caption={Hàm chính xử lý tín hiệu}]
-    % Ham xu ly tin hieu
-    fs = 1000; % tan so lay mau
-    t = 0:1/fs:1; % vector thoi gian
-    x = sin(2*pi*50*t) + sin(2*pi*120*t);
-    y = fft(x);
-    plot(abs(y));
-\end{lstlisting}
+    % Define the transfer function G(s)
+    num = [4.85];
+    den = [1, 0, 53.51];
+    G = tf(num, den);
+    bode(G)
+    \end{lstlisting}
+    \section{Poles và Zeros}
+    \begin{lstlisting}[caption={Code vẽ poles và zeros}, label={lst:pz}]
+    % Delete all variables and close all figures
+    clear all;
+    clc;
+    close all;
+    
+    % Define the transfer function G(s)
+    num = [4.85];        % Numerator (4.85)
+    den = [1, 0, 53.51]; % Denominator (s^2 + 0*s + 53.51)
+    G1 = tf(num, den);   % Create transfer function G1(s)
+    
+    % Create the closed-loop system G_cl(s)
+    G_cl = feedback(G1, 1);   % The close_loop system: G_cl(s) = G1(s)/(1 + G1(s))
+    
+    % Plot the poles and zeros of the closed-loop system
+    figure;
+    pzmap(G_cl);              % Plot
+    title('Pole-zero diagram of closed loop system G_1(s)');
+    grid on;
+    set(gca, 'FontSize', 12);
+    
+    % Display poles and zeros
+    [poles, zeros] = pzmap(G_cl);  % Get poles and zeros
+    disp('The poles of closed-loop system:');
+    disp(poles);
+    disp('The zeros of closed-loop system:');
+    disp(zeros);
+    \end{lstlisting}
+    section{Đáp ứng hệ thống chưa điều khiển}
+    \begin{lstlisting}[caption={Code vẽ đáp ứng hệ thống chưa điều khiển}, label={lst:step}]
+    % Clear variables and previous plots
+    clear all;
+    clc;
+    close all;
+    
+    % Define the transfer function G1(s)
+    num = [4.85];              % Numerator
+    den = [1, 0, 53.51];       % Denominator (s^2 + 53.51)
+    G1 = tf(num, den);         % Create transfer function G1(s)
+    
+    % Create closed-loop system with unit feedback
+    G_cl = feedback(G1, 1);    % Closed-loop system: G_cl(s) = G1(s)/(1 + G1(s))
+    
+    % 1. Plot step response
+    figure;
+    step(G_cl, 10);            % Plot step response over 10 seconds
+    title('Step Response of Closed-Loop System G_1(s)');
+    xlabel('Time (s)');
+    ylabel('Angle \phi (rad)');
+    grid on;
+    set(gca, 'FontSize', 12);
+    
+    % 2. Plot impulse response
+    figure;
+    impulse(G_cl, 10);         % Plot impulse response over 10 seconds
+    title('Impulse Response of Closed-Loop System G_1(s)');
+    xlabel('Time (s)');
+    ylabel('Angle \phi (rad)');
+    grid on;
+    set(gca, 'FontSize', 12);
+    
+    % 3. Compute performance metrics (overshoot, settling time)
+    % Use stepinfo to extract step response characteristics
+    info = stepinfo(G_cl, 'SettlingTimeThreshold', 0.02); % 2% threshold for settling time
+    
+    % Display performance metrics
+    disp('Step Response Information:');
+    disp(['Overshoot (%): ', num2str(info.Overshoot)]);
+    disp(['Settling Time (s): ', num2str(info.SettlingTime)]);
+    
+    % 4. Compute final value (theoretical steady-state value)
+    final_value = dcgain(G_cl);  % Final value = DC gain of the closed-loop system
+    disp(['Final Value (Theoretical): ', num2str(final_value)]);
+    \end{lstlisting}
+
+
+
+    
