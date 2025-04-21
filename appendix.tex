@@ -1,0 +1,9 @@
+
+\begin{lstlisting}[caption={Hàm chính xử lý tín hiệu}]
+    % Ham xu ly tin hieu
+    fs = 1000; % tan so lay mau
+    t = 0:1/fs:1; % vector thoi gian
+    x = sin(2*pi*50*t) + sin(2*pi*120*t);
+    y = fft(x);
+    plot(abs(y));
+\end{lstlisting}

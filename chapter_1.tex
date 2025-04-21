@@ -260,8 +260,11 @@
                 V_a
             \end{equation}
     \section{Hàm truyền hệ thống}
+        \hspace*{0.6cm}Trong phạm vi nghiên cứu này, ta chỉ tập trung vào phương trình liên quan đến góc nghiêng $\phi$, vì đây là yếu tố quyết định đến khả năng giữ thăng bằng của robot. Việc duy trì $\phi$ gần bằng 0 giúp hệ thống đứng vững, trong khi sai lệch lớn sẽ dẫn đến mất cân bằng.
 
-        \hspace*{0.6cm}Phương trình vi phân bậc hai của hệ được viết lại như sau:
+        Do đó, để đơn giản hoá mô hình và tập trung vào mục tiêu ổn định hoá con lắc ngược, ta sử dụng phương trình (1.27) và không xét đến phương trình vị trí $x$ trong các phân tích và thiết kế điều khiển tiếp theo.
+
+        Phương trình vi phân bậc hai của hệ được viết lại như sau:
         
         \begin{equation}
             \ddot{\phi} + \frac{M_p g l}{I_p + M_p l^2} \phi = \frac{2k_m}{R (I_p + M_p l^2)} V_a
@@ -380,7 +383,7 @@
         
         Đây là hàm truyền từ điện áp điều khiển \( V_a \) đến góc lệch \( \phi(t) \) của con lắc ngược.
     \section{Kết luận}
-        Sau khi thực hiện quá trình mô hình hóa, tuyến tính hóa và xây dựng hệ phương trình không gian trạng thái, ta đã thu được hàm truyền tuyến tính biểu diễn mối quan hệ giữa điện áp điều khiển đầu vào $V_a$ và góc nghiêng $\phi$ của robot hai bánh:
+        \hspace*{0.6cm}Sau khi thực hiện quá trình mô hình hóa, tuyến tính hóa và xây dựng hệ phương trình không gian trạng thái, ta đã thu được hàm truyền tuyến tính biểu diễn mối quan hệ giữa điện áp điều khiển đầu vào $V_a$ và góc nghiêng $\phi$ của robot hai bánh:
 
         \[
         G(s) = \frac{4.85}{s^2 + 53.51}
