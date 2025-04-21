@@ -22,8 +22,6 @@
     ],
     "latex-workshop.latex.autoClean.run": "onBuilt",
     "workbench.iconTheme": "vscode-icons",
-    "editor.fontWeight": "bold",
-    "terminal.integrated.fontWeight": "bold",
     "terminal.integrated.fontSize": 16,
     "editor.mouseWheelZoom": true,
     "terminal.integrated.mouseWheelZoom": true,
