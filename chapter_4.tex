@@ -1,7 +1,8 @@
-\chapter{THIẾT KẾ BỘ ĐIỀU KHIỂN PID}
+\chapter{THIẾT KẾ BỘ ĐIỀU KHIỂN CTC (Computed-Torque Control)}
+    \section{Tiêu chí thiết kế}
     \hspace*{0.6cm}Tiêu chí thiết kế:
     \begin{itemize}
-        \item Settling time: $T_s < 1\text{s}$
+        \item Settling time: $T_s < 4\text{s}$
         \item Overshoot: \%OS < 10\%
     \end{itemize}
 
@@ -22,139 +23,137 @@
     Suy ra:
 
     \[
-    \omega_n > \frac{4}{\zeta T_s} = \frac{4}{0.7 \cdot 1} = 5.7143
+    \omega_n > \frac{4}{\zeta T_s} = \frac{4}{0.7 \cdot 4} = 1.42857
     \]
 
-    Chọn $\omega_n = 8 \text{ (rad/s)}$
+    Chọn $\omega_n = 1.5 \text{ (rad/s)}$
 
-    Cực đặc trưng mong muốn là:
-
-    \[
-    s_{1,2} = -5.6 \pm 5.713i
-    \]
-
-    Hàm truyền closed-loop chuẩn để đạt được tiêu chí thiết kế:
-
-    \[
-    G_m(s) = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2} = \frac{64}{s^2 + 11.2s + 64}
-    \]
-
-    Phương trình đặc tính của hệ sau khi điều khiển và hồi tiếp để thỏa mãn có 2 cực đặc trưng mong muốn:
-
-    \[
-    s^2 + 11.2s + 64
-    \]
-
-    Bộ điều khiển PD có dạng:
-
-    \[
-    PD(s) = K_p + K_d s
-    \]
-
-    Hàm truyền cho vòng kín:
-
-    \[
-    T = \frac{PD(s)G(s)}{1 + PD(s)G(s)} = \frac{(K_p + K_d s)G(s)}{1 + (K_p + K_d s)G(s)}
-    \]
-
-    Phương trình đặc tính của hệ sau khi điều chỉnh:
-
-    \[
-    1 + PD(s)G(s) = 1 + (K_p + K_d s)G(s) = 0
-    \]
-
-    \[
-    \Leftrightarrow 1 + (K_p + K_d s) \cdot \frac{4.85}{s^2 + 53.51} = 0
-    \]
-
-    \[
-    \Rightarrow 1 + \frac{(K_p + K_d s) \cdot 4.85}{s^2 + 53.51} = 0
-    \]
-    \[
-    \Leftrightarrow s^2 + 4.85K_d s + 53.51 + 4.85K_p = 0
-    \]
-
-    So sánh hệ số với phương trình đặc tính mong muốn, có hệ phương trình:
-
-    \[
-    \begin{cases}
-    4.85K_d = 11.2 \\
-    53.51 + 4.85K_p = 64
-    \end{cases}
-    \Rightarrow
-    \begin{cases}
-    K_d = 2.31 \\
-    K_p = 2.163
-    \end{cases}
-    \]
-
-    \textbf{Kiểm tra đáp ứng của hệ sau khi thiết kế bộ PD và hồi tiếp}
-
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.7\textwidth]{pictures/PD.png} % Giả sử bạn có ảnh .png
-        \caption{Đáp ứng bậc thang của hệ sau khi thiết kế bộ PD}
-    \end{figure}
-
-    \begin{itemize}
-        \item \textbf{Nhận xét:} Đối với đáp ứng bậc thang, sai số xác lập còn khá lớn, do đó cần thiết kế bộ điều khiển PID để giảm sai số xác lập.
-    \end{itemize}
-
-    Khi thiết kế bộ điều khiển PID, phương trình đặc trưng trở thành bậc 3, do đó chọn 1 cực có $s = z$, nằm xa 2 cực mong muốn để ít ảnh hưởng đến hệ, ở đây chọn $z = -12$.
-
-    Phương trình đặc trưng của hệ để có 2 cực mong muốn:
-
-    \[
-    (s + 12)(s^2 + 11.2s + 64) = s^3 + 23.2s^2 + 198.4s + 768
-    \]
-
-    Bộ điều khiển PID có dạng:
-
-    \[
-    PD(s) = K_p + \frac{K_i}{s} + K_d s = \frac{K_d s^2 + K_p s + K_i}{s}
-    \]
-
-    \textbf{Hàm truyền cho vòng kín:}
-    \[
-    T = \frac{PID(s)G(s)}{1 + PID(s)G(s)}
-    \]
-
-    Phương trình đặc tính của hệ sau khi điều chỉnh:
-
-    \[
-    1 + PID(s)G(s) = 0
-    \]
-
-    \[
-    \Leftrightarrow s^3 + 4.85K_d s^2 + (53.51 + 4.85K_p)s + 4.85K_i = 0
-    \]
-
-    So sánh hệ số với phương trình đặc tính mong muốn, có hệ phương trình:
-
-    \[
-    \begin{cases}
-    4.85K_d = 23.2 \\
-    53.51 + 4.85K_p = 198.4 \\
-    4.85K_i = 768
-    \end{cases}
-    \Rightarrow
-    \begin{cases}
-    K_p = 29.79 \\
-    K_d = 4.7835 \\
-    K_i = 158.35
-    \end{cases}
-    \]
-
-    \textbf{Kiểm tra đáp ứng của hệ sau khi thiết kế bộ PID và hồi tiếp}
-
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.7\textwidth]{pictures/PID.png} % ảnh minh họa
-        \caption{Đáp ứng bậc thang của hệ sau khi thiết kế bộ PID}
-    \end{figure}
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.5\textwidth]{pictures/specification.png} % ảnh minh họa
-        \caption{Thông số đáp ứng bậc thang của hệ sau khi thiết kế bộ PID}
-    \end{figure}
-
+    \section{Computed-Torque Control}
+            Từ hệ phương trình (1.16), ta đưa về dạng tổng quát
+            \begin{equation}
+                M(q) \ddot{q} + C (q, \dot{q}) \dot{q} + G(q) = \tau
+            \end{equation}
+            Trong đó
+            \begin{itemize}
+                \item $q = [x \,\, \theta]^T$: vector trạng thái
+                \item $M(q)$: ma trận quán tính
+                \item $C(q, \dot{q})$: ma trận Coriolis và ly tâm
+                \item $G(q)$: vector trọng lực
+                \item $\tau$: moment xoắn điều khiển từ động cơ
+            \end{itemize} 
+            Ta được
+            \begin{align*}
+                &\underbrace{
+                \begin{bmatrix}
+                M_\Sigma & M_p \ell \cos \theta\\
+                M_p \ell  \cos \theta & J
+                \end{bmatrix}
+                }_{M(q)}
+                \begin{bmatrix}
+                \ddot{x} \\ \ddot{\theta}
+                \end{bmatrix}
+                +
+                \underbrace{
+                \begin{bmatrix}
+                0 & -M_p \ell \dot{\theta} \sin \theta \\
+                0 & 0
+                \end{bmatrix}
+                }_{C(q, \dot{q})}
+                \begin{bmatrix}
+                \dot{x} \\ \dot{\theta}
+                \end{bmatrix} 
+                +
+                \underbrace{
+                \begin{bmatrix}
+                0 & 0 \\
+                0 & -M_p g \ell \sin \theta
+                \end{bmatrix}
+                }_{G(q)}
+                =
+                \underbrace{
+                \begin{bmatrix}
+                F_x \\
+                \tau
+                \end{bmatrix}
+                }
+            \end{align*}
+        Định nghĩa lỗi theo dõi
+        \begin{align}
+            &e(t) = q_d(t) - q(t) \nonumber \\
+            &\dot{e}(t) = \dot{q}_d(t) - \dot{q}(t) \nonumber \\
+            &\ddot{e}(t) = \ddot{q}_d(t) - \ddot{q}(t) \nonumber
+        \end{align}
+        Ta có thể viết lại
+        \begin{align}
+            \ddot{e} = \ddot{q}_d(t) + M^{-1} (C(q, \dot{q})\dot{q} + G(q) - \tau)  \nonumber
+        \end{align}
+        Đặt tín hiệu điều khiển $u$ trở thành
+        \begin{align}
+            u = \ddot{q}_d(t) + M^{-1} (C(q, \dot{q})\dot{q} + G(q) - \tau)  
+        \end{align}
+        Ở đây giả sử cho nhiễu môi trường 
+        \begin{align*}
+            \tau_d = 0
+        \end{align*}
+        Khi đó 
+        \begin{align*}
+            \ddot{e} = u
+        \end{align*}
+        Từ phương trình (2.1), moment xoắn đầu ra được tính như sau
+        \begin{align}
+            \tau = M(q)(\ddot{q_d} - u) + C(q, \dot{q})\dot{q} + G(q)
+        \end{align}         
+        Giả sử chọn $u$ như là một bộ điều khiển PD, ta có
+        \begin{align*}
+            u = - K_p e - K_d \dot{e}
+        \end{align*}
+        Với $K_p$ và $K_d$ là ma trận điều khiển tỉ lệ và vi phân tương ứng. Khi đó phương trình (2.3) trở thành
+        \begin{align}
+            \tau = M(q)(\ddot{q_d} + K_p e + K_d \dot{e}) + C(q, \dot{q})\dot{q} + G(q)
+        \end{align} 
+        Phương trình vòng kín của lỗi động lực học
+        \begin{align}
+            \ddot{e} + K_p e + K_d \dot{e} = 0
+        \end{align}
+        Trong không gian trạng thái
+        \begin{align*}
+            \frac{d}{dt}
+            \begin{bmatrix}
+            e \\ \dot{e}
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            0 & I \\
+            -K_p & -K_d
+            \end{bmatrix}
+            \begin{bmatrix}
+            e \\ \dot{e}
+            \end{bmatrix}
+        \end{align*}
+        Phương trình đặc trưng
+        \begin{align*}
+            s^2 + K_d s + K_p = 0
+        \end{align*}
+        Có dạng chuẩn theo yêu cầu thiết kế
+        \begin{align*}
+            s^2 + 2\zeta \omega_n s + \omega_n^2 = 0
+        \end{align*}
+        So sánh ta thu được
+        \begin{equation*}
+            \begin{cases}
+                K_d = 2\zeta \omega_n  = 2 \cdot 0.7 \cdot 1.5 = 2.1\\
+                K_p = \omega_n^2 = 1.5^2 = 2.25
+            \end{cases}
+        \end{equation*}
+        Đồ thị đáp ứng của vị trí góc (ban đầu góc $-\dfrac{\pi}{2}$, tức là ban đầu xe nằm ngang)
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth]{pictures/torce.png}
+            \caption{Đáp ứng vị trí góc}
+        \end{figure}
+        Đồ thị đáp ứng của vị trí
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth]{pictures/force.png}
+            \caption{Đáp ứng vị trí}
+        \end{figure}
